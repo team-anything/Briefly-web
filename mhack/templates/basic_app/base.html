@@ -6,73 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Base</title>
-
-    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'> -->
-
-
+<!-- FORCE PUSH -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/outside.css' %}"> -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/outside.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/typography.css' %}">
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}"> -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/typography.css' %}"> -->
   </head>
   <body>
-    <input type="checkbox" id="sidebar-toggle" value="" name="">
-    <nav class="navbar">
-        {% if user.is_authenticated %}
-            <div class="user">
-                <span class="user__pic"></span>
-                <span class="user__name">{{query}}</span>
+        <nav class="navbar">
+            <div class="navbar__left">
+                    <p id="time"></p>
+
+                    <script>
+                        function updateClock(){
+                            document.getElementById("time").innerHTML = String(Date()).slice(0,24);
+                        }
+                        setInterval(updateClock, 1000);
+                    </script>
             </div>
-            <ul>
-<!--                 <li class="add"><a href="#">+</a>
-                <div class="add__rss">
-                    <form action="{% url 'basic_app:add'%}" method="post">
-                      {% csrf_token %}
-                      <input type="text" name="add" placeholder="Add Interests">
-                      <input type="submit" value="Add">
-                    </form>
-                </div></li> -->
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-<!--             <script type="text/javascript">
-                var add = document.getElementsByClassName("add")[0];
+            <div class="navbar__center">
+                <img src="{% static 'assets/logo.png' %}" alt="" class="navbar__logo">
+                <span class="navbar__logoname">Briefly</span>
+            </div>
+            <div class="navbar__right">
+                <ul class="navbar__items">
+                    {% if user.is_authenticated %}
+                    <li class="navbar__item"><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li class="navbar__item"><a href="{% url 'basic_app:user_login' %}">Login</a></li>
+                    <li class="navbar__item"><a href="{% url 'basic_app:register' %}">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    <div>
+            <input type="checkbox" id="sidebar-toggle">
+            <label for="sidebar-toggle" class="sidebar__toggle">☰</label>
 
-                add.addEventListener("click", function(e){
-                    if(e.target.nodeName == "A" || e.target.nodeName == "LI") {
-                        console.log("works");
-                        $('.add__rss').toggleClass('add__rss--open');
-                    };
-                });
-            </script> -->
-        {% else %}
-            <ul>
-              <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
-              <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
+        <aside class="sidebar">
+            <ul class="sidebar__items">
+                {% if user.is_active %}
+                <li class="sidebar__item"><a href="{% url 'basic_app:fire' user %}">Home</a></li>
+                {% else %}
+                <li class="sidebar__item"><a href="{% url 'index' %}">Home</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li class="sidebar__item"><a href="{% url 'basic_app:show' %}">Show</a></li>
+                {% endif %}
             </ul>
-        {% endif %}
-    </nav>
-
-    <div class="page-wrap">
-        <label for="sidebar-toggle" class="toggle">☰</label>
+        </aside>
 
         <div class="news">
             {% block body_block %}
             {% endblock %}
         </div>
-
-        <aside class="sidebar">
-            <ul>
-                <li><a href="{% url 'index' %}">Home</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'basic_app:show' %}">Show</a></li>
-                {% endif %}
-            </ul>
-        </aside>
     </div>
 
     <!-- <script src="{% static 'js/animate-form.js' %}"></script> -->

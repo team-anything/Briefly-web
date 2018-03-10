@@ -1,7 +1,7 @@
 // alert("Connected!");
 var submit = document.getElementById("submit");
-var input = document.getElementById("taginput");
-var tags = document.getElementById("tags");
+var input = document.getElementById("subscribe__input");
+var tags = document.getElementById("subscribe__list");
 var close=[].slice.call(document.getElementsByClassName("close"));
 function getCookie(name) {
     var cookieValue = null;
@@ -23,7 +23,7 @@ close.forEach(function(elem,index){
     elem.addEventListener("click", function(){
         var remove = elem.parentNode;
         var result = elem.parentNode.innerHTML;
-        var finalres = result.split("").reverse().slice(28).reverse().join("");
+        var finalres = result.split("").reverse().slice(54).reverse().join("");
         console.log(finalres);
         tags.removeChild(remove);
             $.ajax({
@@ -40,22 +40,22 @@ close.forEach(function(elem,index){
 });
 // added manually
 // submit.addEventListener("click", function(e){
-// 	e.preventDefault();
-// 	var node = document.createElement("DIV");
-// 	var close = document.createElement("SPAN");
-// 	node.classList.add("data");
-// 	close.classList.add("close");
-// 	close.innerHTML = "x";
-// 	node.innerHTML = input.value;
-// 	input.value = "";
-// 	node.appendChild(close);
-// 	tags.appendChild(node);
-// 	close.addEventListener("click", function(){
-// 		var remove = close.parentNode;
-// 		var result = close.parentNode.innerHTML;
-// 		var finalres = result.split("").reverse().slice(28).reverse().join("");
-// 		console.log(finalres);
-// 		tags.removeChild(remove);
+//  e.preventDefault();
+//  var node = document.createElement("DIV");
+//  var close = document.createElement("SPAN");
+//  node.classList.add("data");
+//  close.classList.add("close");
+//  close.innerHTML = "x";
+//  node.innerHTML = input.value;
+//  input.value = "";
+//  node.appendChild(close);
+//  tags.appendChild(node);
+//  close.addEventListener("click", function(){
+//      var remove = close.parentNode;
+//      var result = close.parentNode.innerHTML;
+//      var finalres = result.split("").reverse().slice(28).reverse().join("");
+//      console.log(finalres);
+//      tags.removeChild(remove);
 //             // $.ajax({
 //             //     url: 'basic_app/sub/delete',    //Your api url
 //             //     type: 'POST',   //type is any HTTP method
@@ -65,6 +65,6 @@ close.forEach(function(elem,index){
 //             //     success: function () {
 //             //     }
 //             // });
-// 	});
-// 	console.log(tags);
+//  });
+//  console.log(tags);
 // });

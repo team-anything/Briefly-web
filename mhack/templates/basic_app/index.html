@@ -1,8 +1,11 @@
 {% extends 'basic_app/base.html' %}
 {% block body_block %}
-	<form action="{% url 'basic_app:process'%}" method="post" class="news__query">
-		{% csrf_token %}
-	    <input type="text" name="inputurl" class="news__querysearch" placeholder="Enter news link">
-	    <button class="news__submit" value="GetNews"><i class="fa fa-search"></i></button>
-	</form>
+                <div class="searchbar searchbar--center">
+                    <div class="searchbar__logoname">Briefly</div>
+                    <form action="{% url 'basic_app:process'%}" method="post">
+                        {% csrf_token %}
+                        <input type="text" class="searchbar__query" name="inputurl" placeholder="Search">
+                        <button type="submit" class="searchbar__submit" value="GetNews"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
 {% endblock %}

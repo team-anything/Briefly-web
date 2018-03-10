@@ -14,7 +14,7 @@
           <label for="password">Password</label>
         </div>
         <input type="submit" value="Login">
-      </form>     
+      </form>
     </div>
     <script>
 // var label = [].slice.call(document.getElementsByTagName("label"));
@@ -35,7 +35,7 @@ $('#username').change(function(e){
         $('label[for="username"]').removeClass('trigger');
       }
     }
-}); 
+});
 
 $('#password').change(function(e){
     console.log(this.value.length);
@@ -52,7 +52,7 @@ $('#password').change(function(e){
         $('label[for="password"]').removeClass('trigger');
       }
     }
-}); 
+});
 
     </script>
 {% endblock %}
