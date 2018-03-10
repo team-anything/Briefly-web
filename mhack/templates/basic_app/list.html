@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block body_block %}
+<div class="subscribe__container">
                     <div class="subscribe">
                         <div class="subscribe__form">
                             <form action="{% url 'basic_app:add'%}" method="post">
@@ -16,6 +17,16 @@
                       {% endfor %}
                     </div>
                   </div>
+</div>
+<div class="subscribe__index">
+  <table class="subscribe__table">
+    <tr>
+      <th>Name</th>
+      <th>Link</th>
+    </tr>
+  </table>
+</div>
+  <script src="{% static 'js/subscribeSource.js' %}"></script>
   <script type="text/javascript">
     var rem_url = "{% url 'basic_app:remove'%}";
   </script>
