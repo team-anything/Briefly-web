@@ -2,21 +2,20 @@
 {% load staticfiles %}
 
 {% block body_block %}
-    <div class="login">
-        <div class="add__rss ">
-            <form action="{% url 'basic_app:add'%}" method="post">
-              {% csrf_token %}
-              <label for="add">Tag</label>
-              <input type="text" id="taginput" name="add" placeholder="Subscribe To">
-              <button id="submit">Submit</button>
-            </form>
-        </div>
-    <div id="tags">
-      {% for i in listo %}
-        <div class="data">{{i}}<span class="close">✖</span></div>
-      {% endfor %}
-    </div>
-  </div>
+                    <div class="subscribe">
+                        <div class="subscribe__form">
+                            <form action="{% url 'basic_app:add'%}" method="post">
+                              {% csrf_token %}
+                              <input type="text" id="subscribe__input" name="add" placeholder="Subscribe To">
+                              <button id="submit"><i class="fa fa-plus"></i></button>
+                            </form>
+                        </div>
+                    <div id="subscribe__list">
+                      {% for i in listo %}
+                        <div class="subscribe__name">{{i}}<span class="close"><i class="fa fa-close"></i></span></div>
+                      {% endfor %}
+                    </div>
+                  </div>
   <script type="text/javascript">
     var rem_url = "{% url 'basic_app:remove'%}";
   </script>

@@ -1,30 +1,28 @@
-var btns=[].slice.call(document.getElementsByClassName("btn"));
-var cols=[].slice.call(document.getElementsByClassName("col"));
-var alerts=document.getElementsByClassName("alert");
+var resultcards=[].slice.call(document.getElementsByClassName("resultcard"));
+var summarycards=document.getElementsByClassName("summarycard");
 
-console.log(btns);
-console.log(alerts);
+console.log(summarycards);
 
-cols.forEach(function(elem,index){
-  colorder=index;
-  alertorder=(parseInt(index/3)+1)*3;
-  cols[index].style.order=colorder;
-  alerts[index].style.order=alertorder;
+resultcards.forEach(function(elem,index){
+  resultcardorder=index;
+  summarycardorder=(parseInt(index/3)+1)*3;
+  resultcards[index].style.order=resultcardorder;
+  summarycards[index].style.order=summarycardorder;
 });
 
-cols.forEach(function(elem, index){
+resultcards.forEach(function(elem, index){
   elem.addEventListener("click", function(){
-    if(alerts[index].classList.contains('is-open')){
+    if(summarycards[index].classList.contains('is-open')){
       $('.is-open').toggleClass('is-open');
       $('.active').toggleClass('active');
     }
     else {
       $('.is-open').toggleClass('is-open');
-      alerts[index].classList.add('is-open');
+      summarycards[index].classList.add('is-open');
       $('.active').toggleClass('active');
-      cols[index].classList.add('active');
+      resultcards[index].classList.add('active');
     }
-    // console.log(cols[index]);
+    // console.log(resultcards[index]);
   });
 });
 
