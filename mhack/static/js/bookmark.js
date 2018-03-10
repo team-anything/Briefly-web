@@ -6,5 +6,13 @@ bookmark.forEach(function(elem,index){
 		e.preventDefault();
 		var link=document.getElementsByClassName("fa-newspaper-o")[index].href;
 		console.log(link);
+		if (elem.classList.contains("fa-bookmark-o")){
+			elem.classList.remove("fa-bookmark-o");
+			elem.classList.add("fa-bookmark");
+		}
+		else {
+			elem.classList.remove("fa-bookmark");
+			elem.classList.add("fa-bookmark-o");
+		}
 	});
 });
