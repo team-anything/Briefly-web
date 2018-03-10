@@ -7,6 +7,7 @@ from goose3 import Goose
 from collections import Counter
 import os, datetime
 import pandas as pd
+import hashlib
 
 max_article_addition = 15
 ideal = 20.0
@@ -247,6 +248,61 @@ def sentence_position(i, size):
         return 0
 
 # inactive
+def pinChannel(username,url):
+    try:
+        value=hashlib.sha224(url.encode('utf-8')).hexdigest()
+        sender_id = ''
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+        data={'sub':[value]}
+        users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+            data=users.val()[sender_id]
+            if "pin" in data.keys():
+                lis=data["pin"]
+            else:
+                lis=[]
+            lis.append(value)
+            data['pin']=lis
+            print(data)
+            db.child("users").child(sender_id).update(data,user['idToken'])
+        else:
+            print(data)
+            db.child("users").child(sender_id).set(data,user['idToken'])
+    except:
+        refresh(user)
+        subChannel(sender_id,value)
+#inactive
+def unpinChannel(username,url):
+    try:
+        sender_id=''
+        value=hashlib.sha224(url.encode('utf-8')).hexdigest()
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+        data={}
+        print(sender_id)
+        users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+        if(len(users.each())):#check if entry exists 
+       	    data=users.val()[sender_id]
+            #print(data)
+            if "pin" in data.keys():
+                #print("here")
+                lis=data["pin"]
+                #print(lis)
+                #print(value)
+                if value in lis:
+                    lis.remove(value)
+                    data["pin"]=lis
+                    db.child("users").child(sender_id).update(data,user['idToken'])
+    except:
+        refresh(user)
+        unsubChannel(sender_id,value)
+
+
 def subChannel(username,value):
     try:
         sender_id = ''
@@ -257,14 +313,18 @@ def subChannel(username,value):
         data={'sub':[value]}
         users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
         if(len(users.each())):#check if entry exists
-            lis=users.val()[sender_id]['sub']
+            data=users.val()[sender_id]
+            if "sub" in data.keys():
+                lis=users.val()[sender_id]['sub']
+            else:
+                lis=[]
             lis.append(value)
             data['sub']=lis
             db.child("users").child(sender_id).update(data,user['idToken'])
         else:
             db.child("users").child(sender_id).set(data,user['idToken'])
     except:
-        refresh()
+        refresh(user)
         subChannel(sender_id,value)
 #inactive
 def unsubChannel(username,value):
@@ -277,11 +337,13 @@ def unsubChannel(username,value):
         data={}
         users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
         if(len(users.each())):#check if entry exists
-       	    lis=users.val()[sender_id]['sub']
-            if value in lis:
-                lis.remove(value)
-                data['sub']=lis
-                db.child("users").child(sender_id).update(data,user['idToken'])
+       	    data=users.val()[sender_id]
+            if "sub" in data.keys():
+                lis=data["sub"]
+                if value in lis:
+                    lis.remove(value)
+                    data['sub']=lis
+                    db.child("users").child(sender_id).update(data,user['idToken'])
     except:
         refresh()
         unsubChannel(sender_id,value)
