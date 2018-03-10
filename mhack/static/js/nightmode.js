@@ -13,6 +13,6 @@ nightmodeDiv.addEventListener("click", function(){
 		root.style.setProperty('--color-primary', '#f56a6a');
 		root.style.setProperty('--color-white', '#fff');
 		root.style.setProperty('--color-white-dark', '#ddd');
-		root.style.setProperty('--color-black', '#222');	
-	};	
+		root.style.setProperty('--color-black', '#222');
+	};
 });
