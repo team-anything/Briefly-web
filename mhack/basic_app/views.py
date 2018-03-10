@@ -99,19 +99,20 @@ def fire(request,id):
         #return render(request,'basic_app/user_page.html',{'src':src})
     return render(request,'basic_app/user_page.html',{'src':src})
 
-def preprocess(request):
-    return render(request,'')
+def index2(request):
+    return render(request,'basic_app/index2.html',{})
 
-def browser(request):
+def browse(request):
     if request.method == 'POST':
-        source=request.POST.get('search')
+        source=request.POST.get('inputurl2')
     src = []
     head = []
     desc = []
     image = []
     ct=0
     count=[]
-    li=subscribe.browse(source)
+    print(source)
+    li=subscribe.browser(source)
     for el in li:
         head.append(el[1])
         image.append(el[3])
@@ -126,7 +127,7 @@ def browser(request):
     print(head)
     print(image)
     print(desc)
-    return render(request,'basic_app/user_page.html',{'src':src})
+    return render(request,'basic_app/browse.html',{'src':src})
     #return render(request,'basic_app/user_page.html',{'src':src})
     #return render(request,'basic_app/user_page.html',{'src':src})
 
