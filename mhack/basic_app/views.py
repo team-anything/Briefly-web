@@ -38,9 +38,6 @@ def add(request):
     return HttpResponseRedirect(reverse('basic_app:show'))
 
 
-
-
-
 def process(request):
     p=''
     if request.method == 'POST':
@@ -101,6 +98,38 @@ def fire(request,id):
             return render(request,'basic_app/user_page.html',{'src':src})
         #return render(request,'basic_app/user_page.html',{'src':src})
     return render(request,'basic_app/user_page.html',{'src':src})
+
+def preprocess(request):
+    return render(request,'')
+
+def browser(request):
+    if request.method == 'POST':
+        source=request.POST.get('search')
+    src = []
+    head = []
+    desc = []
+    image = []
+    ct=0
+    count=[]
+    li=subscribe.browse(source)
+    for el in li:
+        head.append(el[1])
+        image.append(el[3])
+        ct+=1
+        count.append(ct)
+        summ=""
+        for ele in el[4]:
+            summ+=ele
+        src.append([source,el[0],el[1],el[3],summ])
+    print(len(src))
+    print(count)
+    print(head)
+    print(image)
+    print(desc)
+    return render(request,'basic_app/user_page.html',{'src':src})
+    #return render(request,'basic_app/user_page.html',{'src':src})
+    #return render(request,'basic_app/user_page.html',{'src':src})
+
 
 def reg(request):
     return HttpResponse("hello")
