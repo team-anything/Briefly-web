@@ -9,6 +9,14 @@
   font-family: 'Open Sans', sans-serif;
 } */
 
+body {
+  background: #f56a6a;
+  font-size: 1.25rem;
+  font-family: sans-serif;
+  line-height: 150%;
+  text-shadow: 0 2px 2px #b6701e;
+}
+
 .formy
 {
   padding:40px;
@@ -80,12 +88,7 @@ input
 * {
   box-sizing: border-box;
 }
-body {
-  font-size: 1.25rem;
-  font-family: sans-serif;
-  line-height: 150%;
-  text-shadow: 0 2px 2px #b6701e;
-}
+
 
 section {
   color: #fff;
@@ -112,6 +115,7 @@ h1 {
 
 /* Pattern styles */
 .container {
+  background: #f56a6a;
   display: table;
   width: 100%;
 }
@@ -128,4 +132,18 @@ h1 {
   position: absolute;
   right: 0px;
   width: 50%;
+}
+.main
+{
+  padding:20px 0px 0px 0px;
+}
+.left-half:after {
+  content: "";
+  background-color: white;
+  position: absolute;
+  width: 5px;
+  height: 400px;
+  top: 120px;
+  left: 99%;
+  display: block;
 }

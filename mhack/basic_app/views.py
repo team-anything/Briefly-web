@@ -135,6 +135,15 @@ def register(request):
             registered = True
             # u = reverse('basic_app:user_login')
             # return HttpResponseRedirect(u)
+            hashcode = 0
+            name = user.username
+            size = len(name)
+            temp = size
+            for i in name:
+                hashcode += ord(i)*(10**temp)
+                temp-=1
+            #print(hashcode)
+            subscribe.addUser(str(hashcode),name)
 
         else:
             # One of the forms was invalid if this else gets called.
