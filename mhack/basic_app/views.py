@@ -131,6 +131,9 @@ def browse(request):
     #return render(request,'basic_app/user_page.html',{'src':src})
     #return render(request,'basic_app/user_page.html',{'src':src})
 
+def bookmarks(request,id):
+    return HttpResponse(id)
+
 
 def reg(request):
     return HttpResponse("hello")
@@ -177,7 +180,7 @@ def register(request):
 
         else:
             # One of the forms was invalid if this else gets called.
-            print(user_form.errors,profile_form.errors)
+            print(user_form.errors)
 
     else:
         # Was not an HTTP post so we just render the forms as blank.
