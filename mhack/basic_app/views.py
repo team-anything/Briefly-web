@@ -132,14 +132,39 @@ def browse(request):
     #return render(request,'basic_app/user_page.html',{'src':src})
 
 def bookadd(request):
-    def remove(request):
-        if request.method == 'POST':
-            searched = request.POST.get('sub')
-            subscribe.unsubChannel(str(request.user),searched)
-        return HttpResponseRedirect(reverse('basic_app:show'))
+    if request.method == 'POST':
+        searched = request.POST.get('add')
+        subscribe.pinChannel(str(request.user),searched)
+        print(searched)
+    return HttpResponse("done")
+    #return HttpResponseRedirect(reverse('basic_app:show'))
 
-def bookmarks(request,id):
-    return HttpResponse(id)
+def bookmarks(request):
+    if request.method == 'POST':
+        #source=request.POST.get('inputurl3')
+        src = []
+        head = []
+        desc = []
+        image = []
+        ct=0
+        count=[]
+        print(request.user)
+        li=subscribe.show_saved(str(request.user))
+        for el in li:
+            head.append(el[1])
+            image.append(el[3])
+            ct+=1
+            count.append(ct)
+            summ=""
+            for ele in el[4]:
+                summ+=ele
+            src.append([source,el[0],el[1],el[3],summ])
+        print(len(src))
+        print(count)
+        print(head)
+        print(image)
+        print(desc)
+    return render(request,'basic_app/bookmarks.html',{'src':src})
 
 
 def reg(request):

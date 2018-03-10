@@ -14,5 +14,5 @@ urlpatterns=[
     url(r'^show/$',views.show,name='show'),
     url(r'^remove/$',views.remove,name='remove'),
     url(r'^(?P<id>[\w-]+)/$',views.fire,name='fire'),
-    url(r'^(?P<id>[\w-]+)/bookmarks$',views.bookmarks,name='bookmarks'),
+    url(r'^bookmarks/$',views.bookmarks,name='bookmarks'),
 ]
