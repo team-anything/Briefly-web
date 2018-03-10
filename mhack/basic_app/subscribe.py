@@ -439,7 +439,11 @@ def generate_feed(username):
             sender_id=str(lis[username])
             users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
             if(len(users.each())):
-                lis=users.val()[sender_id]['sub']
+                lis=users.val()[sender_id]
+                if 'sub' in lis.keys():		
+                    lis=lis['sub']
+                else:
+                    return {}
                 subl={}
                 try:
                     articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
@@ -485,6 +489,42 @@ def browser(source):
                 except:
                     print(hashe)
     return li
+
+def show_saved(username):
+        data={}
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+            users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+            if(len(users.each())):
+                lis=users.val()[sender_id]
+                if 'pin' in lis:
+                    lis=lis['pin']
+                    print(lis)
+                else:
+                    return []
+                try:
+                    articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
+                    Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+                except:
+                    refresh(user_sc)
+                    generate_feed(username)
+                li=[]
+                for hashe in lis:
+                    if hashe!=None:
+                            try:
+                                li.append(Uarticle[hashe])
+                            except:
+                                print(hashe)
+                                pass
+                    result=li
+                    print(li)
+                return result
+            else:
+                return []
+        else:
+            return []
 
 def extra(username):
     #print("hello")
