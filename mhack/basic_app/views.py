@@ -131,6 +131,13 @@ def browse(request):
     #return render(request,'basic_app/user_page.html',{'src':src})
     #return render(request,'basic_app/user_page.html',{'src':src})
 
+def bookadd(request):
+    def remove(request):
+        if request.method == 'POST':
+            searched = request.POST.get('sub')
+            subscribe.unsubChannel(str(request.user),searched)
+        return HttpResponseRedirect(reverse('basic_app:show'))
+
 def bookmarks(request,id):
     return HttpResponse(id)
 
