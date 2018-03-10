@@ -282,6 +282,31 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+  .subscribe__container {
+    position: absolute;
+    left: 0;
+    width: 50vw;
+    height: 100%;
+    border-right: 2px solid #f56a6a; }
+  .subscribe__index {
+    position: absolute;
+    right: 0;
+    width: 50vw;
+    max-height: 100%;
+    overflow: auto; }
+  .subscribe__table {
+    width: 100%; }
+    .subscribe__table table {
+      margin: 0 auto;
+      text-align: center;
+      border-collapse: collapse;
+      border: 1px solid #222; }
+    .subscribe__table tbody:nth-child(odd) {
+      background: rgba(246, 106, 106, 0.2); }
+    .subscribe__table th, .subscribe__table td {
+      padding: 10px 30px; }
+    .subscribe__table th {
+      border-bottom: 1px solid #222; }
 
 #subscribe__input {
   border: 0px;
