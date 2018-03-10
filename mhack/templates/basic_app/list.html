@@ -1,0 +1,24 @@
+{% extends 'basic_app/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <div class="login">
+        <div class="add__rss ">
+            <form action="{% url 'basic_app:add'%}" method="post">
+              {% csrf_token %}
+              <label for="add">Tag</label>
+              <input type="text" id="taginput" name="add" placeholder="Subscribe To">
+              <button id="submit">Submit</button>
+            </form>
+        </div>
+    <div id="tags">
+      {% for i in listo %}
+        <div class="data">{{i}}<span class="close">✖</span></div>
+      {% endfor %}
+    </div>
+  </div>
+  <script type="text/javascript">
+    var rem_url = "{% url 'basic_app:remove'%}";
+  </script>
+  <script src="{% static 'js/animate.js' %}"></script>
+{% endblock %}

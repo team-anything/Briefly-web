@@ -1,0 +1,55 @@
+{% extends 'basic_app/base.html' %}
+{% block body_block %}
+
+
+<!--     <form action="{% url 'basic_app:process'%}" method="post">
+      {% csrf_token %}
+      <input type="text" name="inputurl" placeholder="Enter url">
+      <input type="submit" value="GetNews">
+    </form> -->
+    <form action="{% url 'basic_app:process'%}" method="post" class="news__query--login">
+        {% csrf_token %}
+        <input type="text" name="inputurl" class="news__querysearch--login" placeholder="Enter news link">
+        <button class="news__submit--login"><i class="fa fa-search"></i></button>
+    </form>
+<div class="news__result">
+        {% for i in src %}
+        <div class="col">
+            <img class="col__img" src={{i.3}} alt="#">
+            <h2 class="col__head">{{i.2}}</h2>
+            <h4 class="col__source">{{i.0}}</h4>
+        </div>
+        <div class="alert">
+            <div class="alert__img">
+                <img src={{i.3}} alt="#">
+            </div>
+            <div class="alert__content">
+                <h2 class="alert__heading">{{i.2}}</h2>
+                <p class="alert__summary">{{i.4}}</p>
+                <h4 class="alert__source">{{i.0}}</h4 class="alert__source">
+            </div>
+        </div>
+        {% endfor %}
+<!--                 <div class="col col1">
+                    <img src="https://dummyimage.com/600x400/000/fff" alt="" class="col__img">
+
+                    <h2 class="col__head">Something interesting here, for the love of god !</h2>
+                    <h4 class="col__source">NYTimes</h4>
+                </div>
+                <div class="alert alert1">
+                    <div class="alert__img">
+                        <img src="http://www.thehindu.com/elections/tripura-2018/article22916909.ece/alternates/FREE_660/bjp%20tripurajpg" alt="">
+
+                    </div>
+                    <div class="alert__content">
+                        <h2 class="alert__heading">Tripura Assembly election results live: BJP, IPFT combine lead in 33 seats</h2>
+                        <p class="alert__summary">
+                                “The red fort has been breached and it is a matter of time before the communists, which used beneficiary schemes and    Central government policies only for the party cadres,
+                                 bite the dust,” Sunil Deodhar, BJP’s prabhari (head) of operations in Tripura, told The Hindu on Friday.
+                        </p>
+                        <h4 class="alert__source">NYTimes</h4>
+                    </div>
+                </div> -->
+            </div>
+
+{% endblock %}

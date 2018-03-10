@@ -1,0 +1,8 @@
+.close {
+	background-color: red;
+	padding: 1px;
+	cursor: pointer;
+}
+#tags {
+	margin: 10px;
+}
