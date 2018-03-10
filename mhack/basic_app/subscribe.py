@@ -286,7 +286,7 @@ def unpinChannel(username,url):
         data={}
         print(sender_id)
         users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
-        if(len(users.each())):#check if entry exists 
+        if(len(users.each())):#check if entry exists
        	    data=users.val()[sender_id]
             #print(data)
             if "pin" in data.keys():
@@ -478,6 +478,14 @@ def extra(username):
         lis=users.val()[sender_id]['sub']
         #print(lis)
         return lis
+
+def addUser(sender_id,value):
+    try:
+        data = {sender_id:value}
+        db.child("id").child(value).set(sender_id,user['idToken'])
+    except:
+        refresh(user)
+        addUser(sender_id,value)
 
 if __name__ == "__main__":
     print(subscribe_model(input()))
