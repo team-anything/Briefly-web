@@ -10,6 +10,7 @@
 } */
 
 body {
+  overflow-y: hidden;
   background: #f56a6a;
   font-size: 1.25rem;
   font-family: sans-serif;
@@ -133,10 +134,12 @@ h1 {
   right: 0px;
   width: 50%;
 }
+
 .main
 {
   padding:20px 0px 0px 0px;
 }
+
 .left-half:after {
   content: "";
   background-color: white;
