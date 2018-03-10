@@ -467,6 +467,25 @@ def generate_feed(username):
         else:
             return {}
 
+def browser(source):
+    try:
+        articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
+        Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+    except:
+        refresh(user_sc)
+        generate_feed(username)
+    li=[]
+    if source!=None:
+        if source in articles_per_source.keys():
+            lent=len(articles_per_source[source])
+            hashes=articles_per_source[source][-min(lent,9):]
+            for hashe in hashes:
+                try:
+                    li.append(Uarticle[hashe])
+                except:
+                print(hashe)
+    return li
+
 def extra(username):
     #print("hello")
     users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
