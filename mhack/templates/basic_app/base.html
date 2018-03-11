@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{% static 'js/cookie.js' %}"></script>
         <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <title>Base</title>
 <!-- FORCE PUSH -->
@@ -62,6 +63,7 @@
                 <li class="sidebar__item"><a href="{% url 'index' %}">Home</a></li>
                 {% endif %}
                 <li class="sidebar__item"><a href="{% url 'basic_app:news' %}">Browse</a></li>
+                <li class="sidebar__item"><a href="{% url 'basic_app:featured' %}">Featured</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar__item"><a href="{% url 'basic_app:show' %}">Show</a></li>
                 <li class="sidebar__item"><a href="{% url 'basic_app:bookmarks' %}">Bookmarks</a></li>
