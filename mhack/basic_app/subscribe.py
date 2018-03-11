@@ -20,27 +20,16 @@ max_local_summaries = 10
 
 SUMMARIES = dict()
 
-#firebase initialization
 email="chiragshetty98@gmail.com"
 password="casiitb2016"
 
-config_sc={
-        "apiKey": "AIzaSyBhJDYVmAW3_V3_mGHWcWzi6Q2mYrT9KCY",
-        "authDomain": "scrappy-3b64b.firebaseapp.com",
-        "databaseURL": "https://scrappy-3b64b.firebaseio.com",
-        "storageBucket": "scrappy-3b64b.appspot.com"
-}
-
-firebase_sc = pyrebase.initialize_app(config_sc)
-auth_sc = firebase_sc.auth()
-user_sc = auth_sc.sign_in_with_email_and_password(email,password)
-
 config={
-        "apiKey": "AIzaSyBxrkpatTdHbOIcHyDW9pKvADZtKcgghjw",
-        "authDomain": "jarviz-42bc8.firebaseapp.com",
-        "databaseURL": "https://jarviz-42bc8.firebaseio.com",
-        "storageBucket": "jarviz-42bc8.appspot.com"
+        "apiKey": "AIzaSyCPWujYQAgvfUPh1zqX7jqV51JX0Dj0dnU",
+        "authDomain": "briefly-c7ef1.firebaseapp.com",
+        "databaseURL": "https://briefly-c7ef1.firebaseio.com",
+        "storageBucket": "briefly-c7ef1.appspot.com"
 }
+
 firebase = pyrebase.initialize_app(config)
 auth=firebase.auth()
 user=auth.sign_in_with_email_and_password(email,password)
@@ -49,7 +38,6 @@ def refresh(user):
     user=auth.refresh(user['refreshToken'])
 
 db=firebase.database()
-db_sc=firebase_sc.database()
 
 def summary(url):
     g=Goose()
@@ -247,8 +235,8 @@ def sentence_position(i, size):
     else:
         return 0
 
-# inactive
 def pinChannel(username,url):
+    print(url)
     try:
         value=hashlib.sha224(url.encode('utf-8')).hexdigest()
         sender_id = ''
@@ -274,6 +262,7 @@ def pinChannel(username,url):
     except:
         refresh(user)
         subChannel(sender_id,value)
+
 #inactive
 def unpinChannel(username,url):
     try:
@@ -446,10 +435,10 @@ def generate_feed(username):
                     return {}
                 subl={}
                 try:
-                    articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
-                    Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+                    articles_per_source = db.child("sources").get(user['idToken']).val()
+                    Uarticle = db.child("article").get(user['idToken']).val()
                 except:
-                    refresh(user_sc)
+                    refresh(user)
                     generate_feed(username)
                 result={}
                 for i in lis:
@@ -473,10 +462,10 @@ def generate_feed(username):
 
 def browser(source):
     try:
-        articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
-        Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+        articles_per_source = db.child("sources").get(user['idToken']).val()
+        Uarticle = db.child("article").get(user['idToken']).val()
     except:
-        refresh(user_sc)
+        refresh(user)
         generate_feed(username)
     li=[]
     if source!=None:
@@ -489,6 +478,7 @@ def browser(source):
                 except:
                     print(hashe)
     return li
+
 
 def show_saved(username):
         data={}
@@ -505,19 +495,18 @@ def show_saved(username):
                 else:
                     return []
                 try:
-                    articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
-                    Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+                    articles_per_source = db.child("sources").get(user['idToken']).val()
+                    Uarticle = db.child("article").get(user['idToken']).val()
                 except:
-                    refresh(user_sc)
+                    refresh(user)
                     generate_feed(username)
                 li=[]
+                print("++"*20)
+                print(lis)
                 for hashe in lis:
+                    print("====",hashe)
                     if hashe!=None:
-                            try:
-                                li.append(Uarticle[hashe])
-                            except:
-                                print(hashe)
-                                pass
+                            li.append(Uarticle[hashe])
                     result=li
                     print(li)
                 return result
