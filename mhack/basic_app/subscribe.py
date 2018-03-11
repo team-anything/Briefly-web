@@ -8,8 +8,10 @@ from collections import Counter
 import os, datetime
 import pandas as pd
 import hashlib
-import indian_scraper_plug
-from langdetect import detect 
+from . import indian_scraper_plug
+from langdetect import detect
+
+INDIAN_LANGUAGES = ['hi','guj','ma']
 
 max_article_addition = 15
 ideal = 20.0
@@ -48,17 +50,17 @@ def summary(url):
     title = article.title
     date = ""
     try:
-	image=article.top_image
+	    image=article.top_image
     except:
         image = "http://www.sahalnews.com/wp-content/uploads/2014/12/news-update-.jpg"
     article.nlp()
     # detect here
-    iso_lang = detect(title)    
+    iso_lang = detect(title)
     if iso_lang in INDIAN_LANGUAGES:
-	summary = indian_scraper_plug.summary(article.text,article.title,iso_lang)
+	    summary = indian_scraper_plug.summary(article.text,article.title,iso_lang)
     else:
         summary = article.summary
-    return (title,publish_date,image,headlines)
+    return (title,"",image,summary)
 
 '''
 def load_stopwords(language):
@@ -435,7 +437,7 @@ def generate_feed(username):
             users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
             if(len(users.each())):
                 lis=users.val()[sender_id]
-                if 'sub' in lis.keys():		
+                if 'sub' in lis.keys():
                     lis=lis['sub']
                 else:
                     return {}
