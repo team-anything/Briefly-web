@@ -8,6 +8,8 @@ from collections import Counter
 import os, datetime
 import pandas as pd
 import hashlib
+import indian_scraper_plug
+from langdetect import detect 
 
 max_article_addition = 15
 ideal = 20.0
@@ -40,21 +42,25 @@ def refresh(user):
 db=firebase.database()
 
 def summary(url):
-    g=Goose()
-    print(url)
-    article=g.extract(url)
-    title=article.title
-    publish_date=article.publish_date
-    headlines=[]
+    article=newspaper.Article(url)
+    article.download()
+    article.parse()
+    title = article.title
+    date = ""
     try:
-        image = article.top_image.src
-    except Exception:
-        image = ""
-    for bullets in summarize(url,article.title,article.cleaned_text,n_bullets):
-        headlines.append(bullets)
+	image=article.top_image
+    except:
+        image = "http://www.sahalnews.com/wp-content/uploads/2014/12/news-update-.jpg"
+    article.nlp()
+    # detect here
+    iso_lang = detect(title)    
+    if iso_lang in INDIAN_LANGUAGES:
+	summary = indian_scraper_plug.summary(article.text,article.title,iso_lang)
+    else:
+        summary = article.summary
     return (title,publish_date,image,headlines)
 
-
+'''
 def load_stopwords(language):
     """
     Loads language-specific stopwords for keyword selection
@@ -234,7 +240,7 @@ def sentence_position(i, size):
         return 0.17
     else:
         return 0
-
+'''
 def pinChannel(username,url):
     print(url)
     try:
