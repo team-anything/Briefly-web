@@ -1,0 +1,11 @@
+{% extends 'basic_app/base.html' %}
+{% block body_block %}
+                <div class="searchbar searchbar--center">
+                    <div class="searchbar__logoname">Briefly</div>
+                    <form action="{% url 'basic_app:browse'%}" method="post">
+                        {% csrf_token %}
+                        <input type="text" class="searchbar__query" name="inputurl2" placeholder="Enter news source(eg:nytimes)">
+                        <button type="submit" class="searchbar__submit" value="GetNews"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+{% endblock %}

@@ -1,20 +1,22 @@
 {% extends 'basic_app/base.html' %}
 {% block body_block %}
 
-<!--   <div class="summary">
+  <div class="summary">
+    <div class="feature">
+        <ul class="feature__list feature__list--right">
+            {% if user.is_active %}
+            <li class="feature__item"><a href=""><i class="fa fa-bookmark-o"></i></a></li>
+            {% endif %}
+            <li class="feature__item"><a href=""><i class="fa fa-check-circle"></i></a></li>
+        </ul>
+    </div>
     <h2 class="summary__heading">{{p}}</h2>
     <img class="summary__image" src={{r}} alt="">
     <p class="summary__sum">{{summ}}</p>
-  </div> -->
-  <div class="login">
-        <div class="alert">
-            <div class="alert__img">
-                <img src={{r}} alt="#">
-            </div>
-            <div class="alert__content">
-                <h2 class="alert__heading">{{p}}</h2>
-                <p class="alert__summary">{{summ}}</p>
-            </div>
-        </div>
+    <ul class="feature__list feature__list--right">
+        <!-- <li class="feature__item"><a href="" title="Read More" class="fa fa-newspaper-o"></i></a></li> -->
+        <li class="feature__item"><a href="" title="Facebook Share"><i class="fa fa-facebook"></i></a></li>
+        <li class="feature__item"><a href="" title="Twitter Share"><i class="fa fa-twitter"></i></a></li>
+    </ul>
   </div>
 {% endblock %}

@@ -7,6 +7,7 @@ from goose3 import Goose
 from collections import Counter
 import os, datetime
 import pandas as pd
+import hashlib
 
 max_article_addition = 15
 ideal = 20.0
@@ -247,6 +248,61 @@ def sentence_position(i, size):
         return 0
 
 # inactive
+def pinChannel(username,url):
+    try:
+        value=hashlib.sha224(url.encode('utf-8')).hexdigest()
+        sender_id = ''
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+        data={'sub':[value]}
+        users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+            data=users.val()[sender_id]
+            if "pin" in data.keys():
+                lis=data["pin"]
+            else:
+                lis=[]
+            lis.append(value)
+            data['pin']=lis
+            print(data)
+            db.child("users").child(sender_id).update(data,user['idToken'])
+        else:
+            print(data)
+            db.child("users").child(sender_id).set(data,user['idToken'])
+    except:
+        refresh(user)
+        subChannel(sender_id,value)
+#inactive
+def unpinChannel(username,url):
+    try:
+        sender_id=''
+        value=hashlib.sha224(url.encode('utf-8')).hexdigest()
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+        data={}
+        print(sender_id)
+        users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    data=users.val()[sender_id]
+            #print(data)
+            if "pin" in data.keys():
+                #print("here")
+                lis=data["pin"]
+                #print(lis)
+                #print(value)
+                if value in lis:
+                    lis.remove(value)
+                    data["pin"]=lis
+                    db.child("users").child(sender_id).update(data,user['idToken'])
+    except:
+        refresh(user)
+        unsubChannel(sender_id,value)
+
+
 def subChannel(username,value):
     try:
         sender_id = ''
@@ -257,14 +313,18 @@ def subChannel(username,value):
         data={'sub':[value]}
         users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
         if(len(users.each())):#check if entry exists
-            lis=users.val()[sender_id]['sub']
+            data=users.val()[sender_id]
+            if "sub" in data.keys():
+                lis=users.val()[sender_id]['sub']
+            else:
+                lis=[]
             lis.append(value)
             data['sub']=lis
             db.child("users").child(sender_id).update(data,user['idToken'])
         else:
             db.child("users").child(sender_id).set(data,user['idToken'])
     except:
-        refresh()
+        refresh(user)
         subChannel(sender_id,value)
 #inactive
 def unsubChannel(username,value):
@@ -277,11 +337,13 @@ def unsubChannel(username,value):
         data={}
         users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
         if(len(users.each())):#check if entry exists
-       	    lis=users.val()[sender_id]['sub']
-            if value in lis:
-                lis.remove(value)
-                data['sub']=lis
-                db.child("users").child(sender_id).update(data,user['idToken'])
+       	    data=users.val()[sender_id]
+            if "sub" in data.keys():
+                lis=data["sub"]
+                if value in lis:
+                    lis.remove(value)
+                    data['sub']=lis
+                    db.child("users").child(sender_id).update(data,user['idToken'])
     except:
         refresh()
         unsubChannel(sender_id,value)
@@ -377,7 +439,11 @@ def generate_feed(username):
             sender_id=str(lis[username])
             users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
             if(len(users.each())):
-                lis=users.val()[sender_id]['sub']
+                lis=users.val()[sender_id]
+                if 'sub' in lis.keys():		
+                    lis=lis['sub']
+                else:
+                    return {}
                 subl={}
                 try:
                     articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
@@ -405,6 +471,61 @@ def generate_feed(username):
         else:
             return {}
 
+def browser(source):
+    try:
+        articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
+        Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+    except:
+        refresh(user_sc)
+        generate_feed(username)
+    li=[]
+    if source!=None:
+        if source in articles_per_source.keys():
+            lent=len(articles_per_source[source])
+            hashes=articles_per_source[source][-min(lent,9):]
+            for hashe in hashes:
+                try:
+                    li.append(Uarticle[hashe])
+                except:
+                    print(hashe)
+    return li
+
+def show_saved(username):
+        data={}
+        users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
+        if(len(users.each())):#check if entry exists
+       	    lis=users.val()
+            sender_id=str(lis[username])
+            users=db.child("users").order_by_key().equal_to(sender_id).get(user['idToken'])
+            if(len(users.each())):
+                lis=users.val()[sender_id]
+                if 'pin' in lis:
+                    lis=lis['pin']
+                    print(lis)
+                else:
+                    return []
+                try:
+                    articles_per_source = db_sc.child("sources").get(user_sc['idToken']).val()
+                    Uarticle = db_sc.child("article").get(user_sc['idToken']).val()
+                except:
+                    refresh(user_sc)
+                    generate_feed(username)
+                li=[]
+                for hashe in lis:
+                    if hashe!=None:
+                            try:
+                                li.append(Uarticle[hashe])
+                            except:
+                                print(hashe)
+                                pass
+                    result=li
+                    print(li)
+                return result
+            else:
+                return []
+        else:
+            return []
+
 def extra(username):
     #print("hello")
     users=db.child("id").order_by_key().equal_to(username).get(user['idToken'])
@@ -416,6 +537,14 @@ def extra(username):
         lis=users.val()[sender_id]['sub']
         #print(lis)
         return lis
+
+def addUser(sender_id,value):
+    try:
+        data = {sender_id:value}
+        db.child("id").child(value).set(sender_id,user['idToken'])
+    except:
+        refresh(user)
+        addUser(sender_id,value)
 
 if __name__ == "__main__":
     print(subscribe_model(input()))
