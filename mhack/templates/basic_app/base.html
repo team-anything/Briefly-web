@@ -64,6 +64,7 @@
                 <li class="sidebar__item"><a href="{% url 'basic_app:news' %}">Browse</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar__item"><a href="{% url 'basic_app:show' %}">Show</a></li>
+                <li class="sidebar__item"><a href="{% url 'basic_app:bookmarks' %}">Bookmarks</a></li>
                 {% endif %}
             </ul>
         </aside>
