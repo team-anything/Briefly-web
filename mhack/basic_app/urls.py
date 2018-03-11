@@ -13,10 +13,10 @@ urlpatterns=[
     #url(r'^bookmarks/$',views.bookmarks,name='bookmarks'),
     url(r'^index2/$',views.index2,name='news'),
     url(r'^summary/$',views.process,name='process'),
-    url(r'^test2/$',views.featured,name='featured'),
     url(r'^browse/$',views.browse,name='browse'),
     url(r'^show/$',views.show,name='show'),
     url(r'^remove/$',views.remove,name='remove'),
     url(r'^(?P<id>[\w-]+)/$',views.fire,name='fire'),
     url(r'^(?P<id>[\w-]+)/bookmarks$',views.bookmarks,name='bookmarks'),
+    url(r'^test2/$',views.featured,name='featured'),
 ]
