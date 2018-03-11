@@ -8,9 +8,9 @@
 
 :root {
   --color-primary: #f56a6a;
-  --color-white: #222;
-  --color-white-dark: #555;
-  --color-black: #fff;
+  --color-white: #fff;
+  --color-white-dark: #ddd;
+  --color-black: #222;
   background-color: var(--color-white);
   color: var(--color-black); }
 
