@@ -57,7 +57,7 @@ def process(request):
 
 @login_required
 def fire(request,id):
-    users = UserProfileInfo.objects.all()
+    users = User.objects.all()
     #return HttpResponse(id)
     #form = Add()
     src = []
