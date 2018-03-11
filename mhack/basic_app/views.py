@@ -144,6 +144,7 @@ def bookremove(request):
     print("hello3")
     if request.method == 'POST':
         searched = request.POST.get('add')
+        print(searched)
         subscribe.unpinChannel(str(request.user),searched)
         #print(searched)
         #print(searched)
