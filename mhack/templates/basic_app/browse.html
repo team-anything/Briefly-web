@@ -1,19 +1,6 @@
 {% extends 'basic_app/base.html' %}
 {% block body_block %}
 
-
-<!--     <form action="{% url 'basic_app:process'%}" method="post">
-      {% csrf_token %}
-      <input type="text" name="inputurl" placeholder="Enter url">
-      <input type="submit" value="GetNews">
-    </form> -->
-<div class="searchbar searchbar--top">
-    <form action="{% url 'basic_app:process'%}" method="post">
-        {% csrf_token %}
-        <input type="text" name="inputurl" class="searchbar__query" placeholder="Enter news link">
-        <button class="searchbar__submit"><i class="fa fa-search"></i></button>
-    </form>
-</div>
 <div class="result">
         {% for i in src %}
         <div class="resultcard">
@@ -34,8 +21,7 @@
             <div class="summarycard__right">
                 <div class="feature">
                     <ul class="feature__list feature__list--right">
-                        <li class="feature__item"><a href="{% url 'basic_app:bookadd' %}"><i class="fa fa-bookmark-o bookmark"></i></a></li>
-                        <script>var bookadd_url = "{% url 'basic_app:bookadd' %}"</script>
+                        <li class="feature__item"><a href=""><i class="fa fa-bookmark-o bookmark"></i></a></li>
                         <li class="feature__item"><a href=""><i class="fa fa-check-circle"></i></a></li>
                     </ul>
                 </div>
@@ -53,6 +39,5 @@
         </div>
         {% endfor %}
             </div>
-            <div class="feature__float"><div class="feature__floatitem"><a href="" title="Mail me!"><i class="fa fa-envelope"></i></div></a></div>
 
 {% endblock %}

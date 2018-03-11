@@ -12,8 +12,7 @@
 
   </head>
   <body>
-
-
+    <h1 class="form-logo-head">Briefly</h1>
   <section class="container">
   <div class="left-half">
     <article>
@@ -21,35 +20,35 @@
         <h1 class="thank">Thank you for registering</h1>
       {% else %}
       <div class="formy">
-        <h1 class="form-head">Register here</h1>
-        <h3>Fill out the form</h3>
+        <h1 class="form-head">Register</h1>
 
         <form enctype="multipart/form-data" method="post">
           {% csrf_token %}
           {{user_form.as_p}}
           <input class="button" type="submit" value="Register">
         </form>
-
       </div>
       {% endif %}
     </article>
   </div>
   <div class="right-half">
     <article>
-        <h1>Login Here</h1>
+      <div class="formy">
+        <h1 class="form-head">Login</h1>
         <form  action="{% url 'basic_app:user_login'%}" method="post">
           {% csrf_token %}
           <div class="form-group">
+            <label for="password">Username:</label>
             <input class="form-control" type="text" name="username" id="username">
-            <label for="username">Username</label>
           </div>
           <div class="form-group">
+            <label for="password">Password:</label>
             <input class="form-control" type="password" name="password" id="password">
-            <label for="password">Password</label>
           </div>
-          <input type="submit" value="Login">
+          <input class="button" type="submit" value="Login">
         </form>
       </div>
+    </div>
     </article>
   </div>
 </section>
