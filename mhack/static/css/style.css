@@ -454,6 +454,8 @@ body {
     width: 80%;
     height: auto;
     margin: 1rem 10%; }
+  .summary__sum {
+    line-height: 2.4rem; }
 
 .nightmode {
   position: fixed;
