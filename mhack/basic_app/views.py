@@ -64,7 +64,7 @@ def fire(request,id):
     head = []
     desc = []
     image = []
-
+    print(request.path)
     ct=0
     count=[]
     for i in range(len(users)):
@@ -93,7 +93,6 @@ def fire(request,id):
             print(head)
             print(image)
             print(desc)
-
 
             return render(request,'basic_app/user_page.html',{'src':src})
         #return render(request,'basic_app/user_page.html',{'src':src})
@@ -132,38 +131,49 @@ def browse(request):
     #return render(request,'basic_app/user_page.html',{'src':src})
 
 def bookadd(request):
+    print("hello")
     if request.method == 'POST':
         searched = request.POST.get('add')
         subscribe.pinChannel(str(request.user),searched)
-        print(searched)
+        #print(searched)
+        #print(searched)
     return HttpResponse("done")
     #return HttpResponseRedirect(reverse('basic_app:show'))
 
-def bookmarks(request):
+def bookremove(request):
+    print("hello3")
     if request.method == 'POST':
-        #source=request.POST.get('inputurl3')
-        src = []
-        head = []
-        desc = []
-        image = []
-        ct=0
-        count=[]
-        print(request.user)
-        li=subscribe.show_saved(str(request.user))
-        for el in li:
-            head.append(el[1])
-            image.append(el[3])
-            ct+=1
-            count.append(ct)
-            summ=""
-            for ele in el[4]:
-                summ+=ele
-            src.append([source,el[0],el[1],el[3],summ])
-        print(len(src))
-        print(count)
-        print(head)
-        print(image)
-        print(desc)
+        searched = request.POST.get('add')
+        subscribe.unpinChannel(str(request.user),searched)
+        #print(searched)
+        #print(searched)
+    return HttpResponseRedirect(reverse('basic_app:bookmarks'))
+
+def bookmarks(request):
+    source=''
+    src = []
+    head = []
+    desc = []
+    image = []
+    ct=0
+    count=[]
+    print(request.user)
+    li=subscribe.show_saved(str(request.user))
+    print(li)
+    for el in li:
+        head.append(el[1])
+        image.append(el[3])
+        ct+=1
+        count.append(ct)
+        summ=""
+        for ele in el[4]:
+            summ+=ele
+        src.append([source,el[0],el[1],el[3],summ])
+    print(len(src))
+    print(count)
+    print(head)
+    print(image)
+    print(desc)
     return render(request,'basic_app/bookmarks.html',{'src':src})
 
 

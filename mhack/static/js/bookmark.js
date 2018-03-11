@@ -32,7 +32,7 @@ bookmark.forEach(function(elem,index){
                 },      //Data as js object
                 success: function () {
                 }
-            });			
+            });
 		}
 		// else {
 		// 	elem.classList.remove("fa-bookmark");

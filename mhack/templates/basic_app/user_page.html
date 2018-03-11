@@ -34,8 +34,13 @@
             <div class="summarycard__right">
                 <div class="feature">
                     <ul class="feature__list feature__list--right">
-                        <li class="feature__item"><a href=""><i class="fa fa-bookmark-o bookmark"></i></a></li>
+                        {% if request.path == "/basic_app/bookmarks/" %}
+                        <li class="feature__item"><a href="{% url 'basic_app:bookremove' %}"><i class="fa fa-bookmark-o bookmark"></i></a></li>
+                        <script>var bookadd_url = "{% url 'basic_app:bookremove' %}"</script>
+                        {% else %}
+                        <li class="feature__item"><a href="{% url 'basic_app:bookadd' %}"><i class="fa fa-bookmark-o bookmark"></i></a></li>
                         <script>var bookadd_url = "{% url 'basic_app:bookadd' %}"</script>
+                        {% endif %}
                         <li class="feature__item"><a href=""><i class="fa fa-check-circle"></i></a></li>
                     </ul>
                 </div>
