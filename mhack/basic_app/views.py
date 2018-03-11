@@ -64,7 +64,7 @@ def fire(request,id):
     head = []
     desc = []
     image = []
-    print(request.path)
+    #print(request.path)
     ct=0
     count=[]
     for i in range(len(users)):
@@ -97,6 +97,41 @@ def fire(request,id):
             return render(request,'basic_app/user_page.html',{'src':src})
         #return render(request,'basic_app/user_page.html',{'src':src})
     return render(request,'basic_app/user_page.html',{'src':src})
+
+def featured(request):
+    src = []
+    head = []
+    desc = []
+    image = []
+    #print(request.path)
+    ct=0
+    count=[]
+    li=subscribe.generate_feed('test2')
+    for i in li.keys():
+        print(i)
+        for el in li[i]:
+            head.append(el[1])
+            image.append(el[3])
+            ct+=1
+            count.append(ct)
+            #f=len(el[1])
+            #s="-"*(200-f)
+            #el[1]+=s
+            #len(el[1])
+            summ=""
+            for ele in el[4]:
+                summ+=ele
+            src.append([i,el[0],el[1],el[3],summ])
+                    #desc.append(summ)
+    #print(len(src))
+
+    #print(count)
+    #print(head)
+    #print(image)
+    #print(desc)
+
+        return render(request,'basic_app/featured.html',{'src':src})
+        #return render(request,'basic_app/user_page.html',{'src':src}
 
 def index2(request):
     return render(request,'basic_app/index2.html',{})
