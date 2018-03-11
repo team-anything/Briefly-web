@@ -52,7 +52,7 @@ def process(request):
             summ+=i
         if searched.isspace() or not searched:
             searched = "Please go back and enter something"
-    return render(request,'basic_app/summary.html',{'p':p,'q':q,'r':r,'summ':summ})
+    return render(request,'basic_app/summary.html',{'p':p,'r':r,'summ':summ})
 
 
 @login_required
@@ -99,38 +99,33 @@ def fire(request,id):
     return render(request,'basic_app/user_page.html',{'src':src})
 
 def featured(request):
+    source=''
     src = []
     head = []
     desc = []
     image = []
-    #print(request.path)
     ct=0
     count=[]
-    li=subscribe.generate_feed('test2')
-    for i in li.keys():
-        print(i)
-        for el in li[i]:
-            head.append(el[1])
-            image.append(el[3])
-            ct+=1
-            count.append(ct)
-            #f=len(el[1])
-            #s="-"*(200-f)
-            #el[1]+=s
-            #len(el[1])
-            summ=""
-            for ele in el[4]:
-                summ+=ele
-            src.append([i,el[0],el[1],el[3],summ])
-                    #desc.append(summ)
-    #print(len(src))
+    print(request.user)
+    li=subscribe.show_saved('test2')
+    print(li)
+    for el in li:
+        head.append(el[1])
+        image.append(el[3])
+        ct+=1
+        count.append(ct)
+        summ=""
+        for ele in el[4]:
+            summ+=ele
+        src.append([source,el[0],el[1],el[3],summ])
+    print(len(src))
+    print(count)
+    print(head)
+    print(image)
+    print(desc)
+    #return render(request,'basic_app/bookmarks.html',{'src':src})
 
-    #print(count)
-    #print(head)
-    #print(image)
-    #print(desc)
-
-        return render(request,'basic_app/featured.html',{'src':src})
+    return render(request,'basic_app/featured.html',{'src':src})
         #return render(request,'basic_app/user_page.html',{'src':src}
 
 def index2(request):
@@ -185,7 +180,7 @@ def bookremove(request):
         #print(searched)
     return HttpResponseRedirect(reverse('basic_app:bookmarks'))
 
-def bookmarks(request):
+def bookmarks(request,id):
     source=''
     src = []
     head = []
