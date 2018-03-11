@@ -15,14 +15,28 @@ function getCookie(name) {
     return cookieValue;
 }
 // console.log(bookmark);
+function preLoad(){
+    bookmark.forEach(function(elem,index){
+    var link=document.getElementsByClassName("fa-newspaper-o")[index].href;
+    console.log(link,Cookies.get(link));
+        if(Cookies.get(link)==="true"){
+            elem.classList.remove("fa-bookmark-o");
+            elem.classList.add("fa-bookmark");
+        }
+    })
+};
+
 bookmark.forEach(function(elem,index){
+    var link=document.getElementsByClassName("fa-newspaper-o")[index].href;
+    // Cookies.set(link,false);
 	elem.addEventListener("click", function(e){
 		e.preventDefault();
-		var link=document.getElementsByClassName("fa-newspaper-o")[index].href;
-		console.log(link);
-		if (elem.classList.contains("fa-bookmark-o")){
+        console.log(Cookies.get(link));
+		if (Cookies.get(link)==="false"){
+            Cookies.set(link,true);
 			elem.classList.remove("fa-bookmark-o");
 			elem.classList.add("fa-bookmark");
+            console.log(Cookies.get(link));
             $.ajax({
                 url: bookadd_url,    //Your api url
                 type: 'POST',   //type is any HTTP method
@@ -34,9 +48,22 @@ bookmark.forEach(function(elem,index){
                 }
             });
 		}
-		// else {
-		// 	elem.classList.remove("fa-bookmark");
-		// 	elem.classList.add("fa-bookmark-o");
-		// }
+		else {
+            Cookies.set(link,false);
+			elem.classList.remove("fa-bookmark");
+			elem.classList.add("fa-bookmark-o");
+            $.ajax({
+                url: bookadd_url,    //Your api url
+                type: 'POST',   //type is any HTTP method
+                data: {
+                    add: link,
+                    csrfmiddlewaretoken: getCookie('csrftoken')
+                },      //Data as js object
+                success: function () {
+                }
+            });
+		}
 	});
 });
+
+window.onload = preLoad();
