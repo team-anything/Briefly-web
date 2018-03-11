@@ -35,12 +35,22 @@ h3
 .form-head
 {
   /* color: #6D7781; */
-  color:white
+  color:white;
   font-weight: bold;
   font-size: 4.6em;
   margin-bottom: 20px;
   font-family: 'Sofia', sans-serif;
   font-size: 40px;
+  text-align: center;
+}
+.form-logo-head {
+  transform: translateY(50px);
+  color:white;
+  font-weight: bold;
+  font-size: 4.6em;
+  margin-bottom: 20px;
+  font-family: 'Sofia', sans-serif;
+  font-size: 100px;
   text-align: center;
 }
 p
@@ -50,7 +60,16 @@ p
     font-weight: bold;
     font-size: 1.3em;
     font-family: 'Open San', sans-serif;
-    padding:10px;
+    padding:0px;
+}
+.form-group
+{
+  text-align: center;
+  color:white;
+  font-weight: bold;
+  font-size: 1.3em;
+  font-family: 'Open San', sans-serif;
+  padding:20px;
 }
 form
 {
@@ -63,6 +82,7 @@ input
   background: white;
   opacity: 0.5;
   font-weight: bold;
+  border-radius: 20px;
 }
 .button
 {
@@ -119,6 +139,7 @@ h1 {
   background: #f56a6a;
   display: table;
   width: 100%;
+  transform: translateY(300px);
 }
 
 .left-half {
@@ -126,13 +147,16 @@ h1 {
   position: absolute;
   left: 0px;
   width: 50%;
+  top:0px;
 }
 
 .right-half {
+  /* top:0px; */
   background-color: #f56a6a;
   position: absolute;
   right: 0px;
   width: 50%;
+  top:0px;
 }
 
 .main
@@ -144,9 +168,9 @@ h1 {
   content: "";
   background-color: white;
   position: absolute;
-  width: 5px;
-  height: 400px;
-  top: 120px;
+  width: 1px;
+  height: 200px;
+  top: -100px;
   left: 99%;
   display: block;
 }
