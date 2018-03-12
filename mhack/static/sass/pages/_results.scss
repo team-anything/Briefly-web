@@ -1,0 +1,15 @@
+.result {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    flex-wrap: wrap;
+    padding: .5rem;
+    // background-color: $color-primary;
+    width:70vw;
+    // height:80vh;
+    position: absolute;
+    top:20%;
+    left:50%;
+    transform: translate(-50%,0);
+    transition: all .8s;
+}

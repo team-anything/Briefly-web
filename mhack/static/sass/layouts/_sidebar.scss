@@ -1,0 +1,58 @@
+.sidebar {
+    position: fixed;
+    top: 5.5rem;
+    left: -15rem;
+    width: 15rem;
+    background-color: $color-black;
+    height: 100%;
+    box-shadow: 0 1rem 2rem rgba(0,0,0, .2);
+    transition: all .8s;
+    z-index: 2;
+
+    &__items {
+        list-style: none;
+    }
+
+    &__item {
+        font-size: 1.6rem;
+        text-align: center;
+        cursor: pointer;
+        padding: 1.6rem;
+        transition: box-shadow .5s;
+        a {
+            color: $color-white;
+        }
+        &:hover {
+            box-shadow: inset -1.5rem 0 0 0 var(--color-primary);
+            a {
+                color: var(--color-primary);
+            }
+        }
+    }
+    &__toggle {
+        z-index: 2;
+        position: fixed;
+        top: 5.5rem;
+        left: .5rem;
+        cursor: pointer;
+        user-select: none;
+        font-size: 3rem;
+        transition: all .8s;
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+}
+#sidebar-toggle:checked ~ .sidebar{
+    left: 0;
+}
+#sidebar-toggle:checked ~ .sidebar__toggle {
+    left: 15.5rem;
+}
+#sidebar-toggle:checked ~ .news {
+    left: 15rem;
+}
+#time {
+    font-weight: bold;
+}
