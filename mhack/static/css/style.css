@@ -26,7 +26,7 @@ a {
 
 body {
   font-size: 1.6rem;
-  font-family: "Lato"; }
+  font-family: "Sans-Serif"; }
 
 .navbar {
   z-index: 10;
@@ -275,6 +275,7 @@ body {
     padding-bottom: 1rem;
     font-size: 2rem; }
   .summarycard__summary {
+    line-height: 2.4rem;
     font-size: 1.8rem; }
   .summarycard__source {
     text-align: right;
@@ -388,6 +389,7 @@ body {
       .feature__float:hover .feature__floatitem a {
         color: var(--color-primary); }
   .feature__floatitem {
+    cursor: pointer;
     width: 50px;
     text-align: center;
     display: inline-block;
@@ -403,6 +405,7 @@ body {
     .feature__list--right {
       text-align: right; }
   .feature__item {
+    cursor: pointer;
     width: 50px;
     text-align: center;
     display: inline-block;
@@ -451,6 +454,8 @@ body {
     width: 80%;
     height: auto;
     margin: 1rem 10%; }
+  .summary__sum {
+    line-height: 2.4rem; }
 
 .nightmode {
   position: fixed;

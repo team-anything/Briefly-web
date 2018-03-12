@@ -24,11 +24,11 @@ max_local_summaries = 10
 
 SUMMARIES = dict()
 
-email="chiragshetty98@gmail.com"
-password="casiitb2016"
+email=" "
+password=" "
 
 config={
-        "apiKey": "AIzaSyCPWujYQAgvfUPh1zqX7jqV51JX0Dj0dnU",
+        "apiKey": "",
         "authDomain": "briefly-c7ef1.firebaseapp.com",
         "databaseURL": "https://briefly-c7ef1.firebaseio.com",
         "storageBucket": "briefly-c7ef1.appspot.com"
