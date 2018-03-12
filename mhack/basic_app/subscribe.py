@@ -24,8 +24,8 @@ max_local_summaries = 10
 
 SUMMARIES = dict()
 
-email=""
-password=""
+email=" "
+password=" "
 
 config={
         "apiKey": "",
