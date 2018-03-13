@@ -57,6 +57,7 @@ def process(request):
 
 @login_required
 def fire(request,id):
+    print("hello")
     users = User.objects.all()
     #return HttpResponse(id)
     #form = Add()
@@ -68,9 +69,10 @@ def fire(request,id):
     ct=0
     count=[]
     for i in range(len(users)):
-        #print(users[i],id)
+        print(users[i],id)
         if(str(users[i]) == id):
             li=subscribe.generate_feed(id)
+            print(li)
             for i in li.keys():
                 print(i)
                 for el in li[i]:

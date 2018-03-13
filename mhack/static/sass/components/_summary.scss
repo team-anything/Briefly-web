@@ -1,0 +1,22 @@
+.summary {
+    background-color: var(--color-white-dark);
+    position: absolute;
+    margin: 5rem 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 75vw;
+    box-shadow: 0 1rem 2rem 0 rgba(0,0,0,.2);
+    padding: 2rem;
+    border: 2px solid var(--color-primary);
+
+    &__image {
+        width: 80%;
+        height: auto;
+        margin: 1rem 10%;
+    }
+
+    &__sum {
+        line-height: 2.4rem;
+    }
+}

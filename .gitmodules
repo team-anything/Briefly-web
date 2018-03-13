@@ -1,0 +1,6 @@
+[submodule "Briefly-web"]
+	path = Briefly-web
+	url = https://github.com/inishchith/Briefly-web.git
+[submodule "briefly"]
+	path = briefly
+	url = https://github.com/inishchith/Briefly.git

@@ -1,0 +1,63 @@
+.searchbar {
+    position: absolute;
+    width: 33%;
+
+    &--center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    &--top {
+        left: 50%;
+        top: 10%;
+        transform: translate(-50%,-50%);
+    }
+
+    &__logoname {
+        width: 100%;
+        font-weight: bold;
+        margin-left: 1rem;
+        font-family: 'Sofia', cursive;
+        font-size: 5rem;
+        color: var(--color-primary);
+        text-align: center;
+        cursor: default;
+        margin-bottom: 1rem;
+    }
+
+    &__query {
+        border:0px;
+        width: 100%;
+        padding: .5rem;
+        height: 3rem;
+        border-radius: 2px;
+        outline: 2px solid var(--color-primary);
+        outline-offset: 0px;
+        float: left;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0, .2);
+        transition: all .8s;
+    
+        &:focus {
+            box-shadow: 0 1rem 3rem rgba(0,0,0, .3);
+            &~button {
+                box-shadow: 0 1rem 3rem rgba(0,0,0, .3);
+            }
+        }
+    }
+
+    &__submit {
+        border: 0px;
+        position: absolute;
+        color: var(--color-white);
+        font-size: 2rem;
+        text-align: center;
+        height: 3rem;
+        width: 3rem;
+        background-color: var(--color-primary);
+        outline: 2px solid var(--color-primary);
+        cursor: pointer;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0, .2);
+        transition: all .8s;
+    }
+}
