@@ -29,7 +29,7 @@ function preLoad(){
 bookmark.forEach(function(elem,index){
     var link=document.getElementsByClassName("fa-newspaper-o")[index].href;
     // Cookies.set(link,false);
-	elem.addEventListener("click", function(e){
+	elem.parent().addEventListener("click", function(e){
 		e.preventDefault();
         console.log(Cookies.get(link));
 		if (Cookies.get(link)==="false"){
